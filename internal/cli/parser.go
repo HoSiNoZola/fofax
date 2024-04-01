@@ -69,6 +69,8 @@ type queryOfFile struct {
 }
 
 type filter struct {
+	// JSON格式输出
+	Json bool
 	// 填写需要获取的字段如，port
 	FetchFields string
 	// 指定显示的分隔符
@@ -175,6 +177,7 @@ func init() {
 		flags.BoolVarP(&args.FetchJarmOfDomain, "fetch-jarm-ofDomain", "fjo", false, "Fetch website jarm"),
 		flags.StringVarP(&args.FetchFields, "fetch-fields", "ff", DefaultField, "Fetch by fields.eg:  -ff host,lastupdatetime"),
 		flags.StringVar(&args.FetchFieldsSplit, "fetch-fields-split", ",", "Specify characters to split data in different fields"),
+		flags.BoolVarP(&args.Json, "json", "j", false, "Write output in JSONL(ines) format"),
 	)
 
 	createGroup(
