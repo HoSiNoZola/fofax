@@ -59,14 +59,15 @@ func (f *FoFa) fetchByFields(fields string, queryStr string) bool {
 		// max window限制
 		maxSize = 10000 * 50000
 	}
-	// 找到最小值
-	perPage := int(math.Min(float64(maxSize), 10000))
-	if f.option.Debug {
-		printer.Debugf("FoFa Size : %d", perPage)
-		printer.Debugf("FoFa input Query of: %s", queryStr)
-	}
 
 	for {
+		// 找到最小值
+		perPage := int(math.Min(float64(maxSize), 10000))
+		if f.option.Debug {
+			printer.Debugf("FoFa Size : %d", perPage)
+			printer.Debugf("FoFa input Query of: %s", queryStr)
+		}
+
 		var isOptionsArgs string
 		if f.option.Include {
 			isOptionsArgs = "&fraud=true"
