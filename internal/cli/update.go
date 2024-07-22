@@ -26,7 +26,7 @@ func updateTips(tagName string) error {
 		return err
 	}
 	if latest == nil {
-		return errors.New("latest version is nil")
+		return errors.New("Latest version is nil")
 	}
 
 	if !args.Update {
@@ -36,7 +36,6 @@ func updateTips(tagName string) error {
 	return nil
 }
 
-// updateFoFaXVersionToLatest from nuclei.
 func updateFoFaXVersionToLatest() (*update.Release, error) {
 	var command string
 	switch runtime.GOOS {
@@ -55,7 +54,7 @@ func updateFoFaXVersionToLatest() (*update.Release, error) {
 	}
 	releases, err := m.LatestReleases()
 	if err != nil {
-		return nil, errors.Wrap(err, "could not fetch latest release")
+		return nil, errors.Wrap(err, "Could not fetch latest release")
 	}
 	if len(releases) == 0 {
 		return nil, errors.New("No new updates found for fofax engine!")
@@ -77,11 +76,11 @@ func updateFoFaXVersionToLatest() (*update.Release, error) {
 		printer.Info("Download will start soon...")
 		tarball, err := final.DownloadProxy(progress.Reader)
 		if err != nil {
-			return nil, errors.Wrap(err, "could not download latest release")
+			return nil, errors.Wrap(err, "Could not download latest release")
 		}
 		currentPath, _ := os.Getwd()
 		if err := m.InstallTo(tarball, currentPath); err != nil {
-			return nil, errors.Wrap(err, "could not install latest release")
+			return nil, errors.Wrap(err, "Could not install latest release")
 		}
 		printer.Successf("Successfully updated to fofax %s", latest.Version)
 		printer.Success("Use [./fofax -v] to view")

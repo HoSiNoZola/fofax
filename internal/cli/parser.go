@@ -430,7 +430,11 @@ func checkUpdateInfo() {
 	if -time.Until(lasTime) > 7*24*time.Hour || args.Update {
 		err := updateTips(FoFaXVersion)
 		if err != nil {
-			printer.Error(err.Error())
+			if strings.Contains(err.Error(), "No new updates found") {
+				printer.Info(err.Error())
+			} else {
+				printer.Error(err.Error())
+			}
 		}
 		err = os.WriteFile(lastFile, []byte(time.Now().Format("2006-01-02T15:04:05Z")), os.ModePerm)
 		if err != nil {
